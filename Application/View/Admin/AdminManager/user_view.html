@@ -1,0 +1,20 @@
+<table border="1px">
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>加入时间</th>
+        <th>最后登录时间</th>
+        <th>操作</th>
+    </tr>
+    <?php foreach($rows as $row): ?>
+    <tr>
+        <td><?php echo $row['id']; ?></td>
+        <td><?php echo $row['username']; ?></td>
+        <td><?php echo $row['password']; ?></td>
+        <td><?php echo date('Y-m-d H:i:s',$row['add_time']); ?></td>
+        <td><?php echo date('Y-m-d H:i:s',$row['last_time']); ?></td>
+        <td><a href="index.php?c=AdminManager&a=remove&id=<?php echo $row['id']; ?>">删除</a></td>
+    </tr>
+    <?php endForeach; ?>
+</table>
