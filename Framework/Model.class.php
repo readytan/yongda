@@ -139,7 +139,6 @@ abstract class Model {
      *  insert into category(`name`,`intro`,parent_id)  values('手机','精品手机',1)
      */
     public function insertData($data){
-
         //将$data中的数据 和 表中的列 对比... data中数据的键不在表列(this->feilds)中.. 说明就将该键从data中删除
         $this->ignoreFields($data);
 
@@ -163,6 +162,7 @@ abstract class Model {
      * @param $data
      */
     private function ignoreFields(&$data){
+       
         $keys = array_keys($data);
         foreach($keys as $key){
             if(!in_array($key,$this->fields)){  //检测data中的键是否在$this->fields中存在
@@ -182,7 +182,6 @@ abstract class Model {
     public function updateData($data,$condition=''){
         //update category set `name`='手机',`intro`= '精品手机',`parent_id`='1',
          $this->ignoreFields($data);
-
         $sql = "update ".$this->table().' set ';
         foreach($data as $key=>$value){
             if($key!=$this->fields['PK']){  //排除主键
@@ -236,6 +235,7 @@ abstract class Model {
         }
         //>>1.得到总条数
         $count = $this->count($conditions);
+        
         //>>3.得到当前页的数据列表
         $start = ($page-1)*$pageSize;
         if($start!=0&&$start>=$count){
@@ -243,13 +243,7 @@ abstract class Model {
         }
         //查询出满足条件的数据列表
         $rows = $this->getAll("$conditions limit $start,$pageSize");//  select * from it_goods where  1=1  limit $start,$pageSize
-
         return  array('rows'=>$rows,'count'=>$count);
-        
     }
-//    public function getList(){
-//        $rows=  $this->getAll();
-//        return $rows;
-//    }
 
 }

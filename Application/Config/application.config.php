@@ -12,8 +12,8 @@ return array(
         'prefix'=>'yd_'   //配置前缀
     ),
     'app'=>array(  //将来为项目提供默认值
-        'default_platform'=>'Admin',
-        'default_controller'=>'AdminManager',
+        'default_platform'=>'Home',
+        'default_controller'=>'User',
         'default_action'=>'login',
     ),
     //前后台的配置信息
