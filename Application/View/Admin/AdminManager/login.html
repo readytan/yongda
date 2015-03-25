@@ -1,140 +1,96 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <title>用户登录</title>
-    <link rel="stylesheet" href="Public/Admin/css/base.css" />
-    <link rel="stylesheet" href="Public/Admin/css/global.css" />
-    <link rel="stylesheet" href="Public/Admin/css/login-register.css" />
-    <style>
-        .submit{
-            background-color: #0099CC;
-        }
-        #image {
-            weight=280px;
-            margin-top: 20px;
+    <title>ECSHOP 管理中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="Public/Admin/styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="Public/Admin/styles/main.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        body {
+            color: white;
         }
     </style>
+
+    <script type="text/javascript" src="../js/utils.js"></script><script type="text/javascript" src="js/validator.js"></script><script language="JavaScript">
+    <!--
+    // 这里把JS用到的所有语言都赋值到这里
+    var process_request = "正在处理您的请求...";
+    var todolist_caption = "记事本";
+    var todolist_autosave = "自动保存";
+    var todolist_save = "保存";
+    var todolist_clear = "清除";
+    var todolist_confirm_save = "是否将更改保存到记事本？";
+    var todolist_confirm_clear = "是否清空内容？";
+    var user_name_empty = "管理员用户名不能为空!";
+    var password_invaild = "密码必须同时包含字母及数字且长度不能小于6!";
+    var email_empty = "Email地址不能为空!";
+    var email_error = "Email地址格式不正确!";
+    var password_error = "两次输入的密码不一致!";
+    var captcha_empty = "您没有输入验证码!";
+
+    if (window.parent != window)
+    {
+        window.top.location.href = location.href;
+    }
+
+    //-->
+</script>
 </head>
-<body>
-<!--顶部信息start-->
-<!--
-<div id="topnav">
-    <div class="topwrap">
-        <dl class="user-entry">
-            <dt>您好，欢迎来到ShopCZ商城<a href=""></a></dt>
-            <dd>[<a href="">登录</a>]</dd>
-            <dd>[<a href="">注册</a>]</dd>
-            <dd></dd>
-        </dl>
-        <ul class="quick-menu">
-            <li class="user-center">
-                <div class="menu">
-                    <a href="" class="menu-hd">我的商城</a>
-                    <div class="menu-bd">
-                        <ul>
-                            <li><a href="">已买到的商品</a></li>
-                            <li><a href="">我的空间</a></li>
-                            <li><a href="">我的好友</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="cart">
-                <div class="menu">
-                    <span class="menu-hd">购物车<strong>0</strong>种商品</span>
-                    <div class="menu-bd">
-                        <div class="no-order">
-                            <span>您的购物车中暂无商品，赶快选择心爱的商品吧！</span>
-                            <a href="" class="button">查看购物车</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="favorite">
-                <div class="menu">
-                    <a href="" class="menu-hd">我的收藏</a>
-                    <div class="menu-bd">
-                        <ul>
-                            <li><a href="">收藏的商品</a></li>
-                            <li><a href="">收藏的店铺</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="pm">
-                <a href="">站内信</a>
-            </li>
-        </ul>
-    </div>
-</div>
--->
-<!--顶部信息end-->
+<body style="background: #278296">
+<form method="post" action="index.php?p=Admin&c=AdminManager&a=checkLogin" name='theForm'>
+    <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
+        <tr>
+            <td><img src="Public/Admin/images/login.png" width="178" height="256" border="0" alt="ECSHOP" /></td>
+            <td style="padding-left: 50px">
+                <table>
+                    <tr>
+                        <td>管理员姓名：</td>
+                        <td><input type="text" name="username" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td>管理员密码：</td>
+                        <td><input type="password" name="password" /></td>
+                    </tr>
+                    <tr>
+                        <td>验证码：</td>
+                        <td><input type="text" name="captcha" class="capital" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <img src="index.php?p=Public&c=Captcha&a=index" title="点击改变图片" style="cursor: pointer" onclick="this.src='index.php?p=Public&c=Captcha&a=index&xxxxx='+Math.random()"/>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">请保存我这次的登录信息。</label></td></tr>
+                    <tr><td>&nbsp;</td><td><input type="submit" value="进入管理中心" class="button" /></td></tr>
+                    <tr>
+                        <td colspan="2" align="right">&raquo; <a href="../../" style="color:white">返回首页</a> &raquo; <a href="get_password.php?act=forget_pwd" style="color:white">您忘记了密码吗?</a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="act" value="signin" />
+</form>
+<script language="JavaScript">
+    <!--
+    document.forms['theForm'].elements['username'].focus();
 
-<div class="header wrap1000">
-    <a href=""><img src="Public/Admin/images/logo.png" alt="" /></a>
-</div>
+    /**
+     * 检查表单输入的内容
+     */
+    function validate()
+    {
+        var validator = new Validator('theForm');
+        validator.required('username', user_name_empty);
+        //validator.required('password', password_empty);
+        if (document.forms['theForm'].elements['captcha'])
+        {
+            validator.required('captcha', captcha_empty);
+        }
+        return validator.passed();
+    }
 
-<div class="main">
-    <div class="login-form fr">
-        <div class="form-hd">
-            <h3>用户登录</h3>
-        </div>
-        <div class="form-bd">
-            <form action="index.php?p=Admin&c=AdminManager&a=checkLogin" method="POST">
-                <dl>
-                    <dt>用户名</dt>
-                    <dd><input type="text" name="username" class="text" /></dd>
-                </dl>
-                <dl>
-                    <dt>密&nbsp;&nbsp;&nbsp;&nbsp;码</dt>
-                    <dd><input type="password" name="password" class="text"/></dd>
-                </dl>
-                <dl>
-                    <dt>验证码</dt>
-                        <dd>
-                            <input type="text" name="captcha" class="text"/>
-                        </dd>
-                    <dt>&nbsp;</dt>
-                    <dd>
-                        <img src="index.php?p=Public&c=Captcha&a=index" id="image" title="点击改变图片" style="cursor: pointer" onclick="this.src='index.php?p=Public&c=Captcha&a=index&i='+Math.random()">
-                    </dd>
-
-                </dl>
-                <dl>
-                    <dt>&nbsp;</dt>
-                    <dd><input type="submit" style="cursor: pointer" value="登  录" class="submit"/> <a href="" class="forget">忘记密码?</a></dd>
-                </dl>
-            </form>
-            <dl>
-                <dt>&nbsp;</dt>
-                <dd> 还不是本站会员？立即 <a href="" class="register">注册</a></dd>
-            </dl>
-            <dl class="other">
-                <dt>&nbsp;</dt>
-                <dd>
-                    <p>您可以用合作伙伴账号登录：</p>
-                    <a href="" class="qq"></a>
-                    <a href="" class="sina"></a>
-                </dd>
-            </dl>
-        </div>
-        <div class="form-ft">
-
-        </div>
-    </div>
-
-    <div class="login-form-left fl">
-        <img src="Public/Admin/images/left.jpg" alt="" />
-    </div>
-</div>
-
-<div class="footer clear wrap1000">
-    <p> <a href="">首页</a> | <a href="">招聘英才</a> | <a href="">广告合作</a> | <a href="">关于ShopCZ</a> | <a href="">联系我们</a></p>
-    <p>Copyright 2004-2013 itcast Inc.,All rights reserved.</p>
-</div>
-
-
+    //-->
+</script>
 </body>
-</html>
