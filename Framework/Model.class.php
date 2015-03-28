@@ -141,7 +141,9 @@ abstract class Model {
     public function insertData($data){
         //将$data中的数据 和 表中的列 对比... data中数据的键不在表列(this->feilds)中.. 说明就将该键从data中删除
         $this->ignoreFields($data);
-
+        if(array_key_exists($this->fields['PK'],$data)){
+            unset($data[$this->fields['PK']]);
+        }
         $sql  = "insert into ".$this->table().'(';
         $keys = array_keys($data);
         //>>1.根据键拼表名后面的列名
