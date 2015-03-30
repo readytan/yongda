@@ -1,0 +1,122 @@
+<!---后台展示用户信息列表--->
+
+<!-- $Id: users_list.htm 17053 2010-03-15 06:50:26Z sxc_shop $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 用户列表 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="Public/Admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="Public/Admin/styles/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/Admin/js/transport.js"></script><script type="text/javascript" src="Public/Admin/js/common.js"></script><script language="JavaScript">
+<!--
+// 这里把JS用到的所有语言都赋值到这里
+var process_request = "正在处理您的请求...";
+var todolist_caption = "记事本";
+var todolist_autosave = "自动保存";
+var todolist_save = "保存";
+var todolist_clear = "清除";
+var todolist_confirm_save = "是否将更改保存到记事本？";
+var todolist_confirm_clear = "是否清空内容？";
+var no_username = "没有输入用户名。";
+var invalid_email = "没有输入邮件地址或者输入了一个无效的邮件地址。";
+var no_password = "没有输入密码。";
+var less_password = "输入的密码不能少于六位。";
+var passwd_balnk = "密码中不能包含空格";
+var no_confirm_password = "没有输入确认密码。";
+var password_not_same = "输入的密码和确认密码不一致。";
+var invalid_pay_points = "消费积分数不是一个整数。";
+var invalid_rank_points = "等级积分数不是一个整数。";
+var password_len_err = "新密码和确认密码的长度不能小于6";
+//-->
+</script>
+</head>
+<body>
+
+<h1>
+<span class="action-span1"><a href="index.php?act=main">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 用户列表 </span>
+<div style="clear:both"></div>
+</h1>
+<div class="form-div">
+    <form action="index.php?p=Admin&c=AdminManager&a=userList" name="searchForm" method="post">
+    <img src="Public/Admin/images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+   用户积分大于&nbsp;<input type="text" name="pay_points_gt" size="8" />&nbsp;用户积分小于&nbsp;<input type="text" name="pay_points_lt" size="10" />
+   &nbsp;用户名称 &nbsp;<input type="text" name="keyword" value="<?php echo isset($_REQUEST['keyword'])?$_REQUEST['keyword']:'';?>" /> <input type="submit" value=" 搜索 " />
+  </form>
+</div>
+
+<form method="POST" action="" name="listForm" onsubmit="return confirm_bath()">
+
+<!-- start users list -->
+<div class="list-div" id="listDiv">
+<!--用户列表部分-->
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>
+      <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">
+      <a href="javascript:listTable.sort('user_id'); ">编号</a><img src="Public/Admin/images/sort_desc.gif">    </th>
+    <th><a href="javascript:listTable.sort('user_name'); ">用户名称</a></th>
+    <th><a href="javascript:listTable.sort('email'); ">邮件地址</a></th>
+    <th>可用资金</th>
+    <th>消费积分</th>
+    <th><a href="javascript:listTable.sort('reg_time'); ">注册日期</a></th>
+    <th>操作</th>
+  <tr>
+      <?php foreach($rows as $row):?>
+    <tr>
+    <td><input type="checkbox" name="checkboxes[]" value="5" notice="0"/>5</td>
+    <td class="first-cell"><?php echo $row['username'];?></td>
+    <td><span onclick="listTable.edit(this, 'edit_email', 5)"><?php echo $row['email'];?></span></td>
+    <td><?php echo $row['money'];?></td>
+    <td><?php echo $row['consume_score'];?></td>
+    <td><?php echo $row['register_time'];?></td>
+    <td align="center">
+        <a href="index.php?p=Admin&c=AdminManager&a=consigneeList&id=<?php echo $row['user_id'];?>"/>收货地址<a>
+        <a href="index.php?p=Admin&c=AdminManager&a=checkOrder&id=<?php echo $row['user_id'];?>/>"/>查看订单<a>
+    </td>
+  </tr>
+      <?php endforeach;?>
+    
+    <?php echo   $page_html;?>
+</table>
+
+</div>
+<!-- end users list -->
+</form>
+
+<div id="footer">
+共执行 4 个查询，用时 0.013001 秒，Gzip 已禁用，内存占用 2.240 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+<!-- 新订单提示信息 -->
+<div id="popMsg">
+  <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#cfdef4" border="0">
+  <tr>
+    <td style="color: #0f2c8c" width="30" height="24"></td>
+    <td style="font-weight: normal; color: #1f336b; padding-top: 4px;padding-left: 4px" valign="center" width="100%"> 新订单通知</td>
+    <td style="padding-top: 2px;padding-right:2px" valign="center" align="right" width="19"><span title="关闭" style="cursor: hand;cursor:pointer;color:red;font-size:12px;font-weight:bold;margin-right:4px;" onclick="Message.close()" >×</span><!-- <img title=关闭 style="cursor: hand" onclick=closediv() hspace=3 src="msgclose.jpg"> --></td>
+  </tr>
+  <tr>
+    <td style="padding-right: 1px; padding-bottom: 1px" colspan="3" height="70">
+    <div id="popMsgContent">
+      <p>您有 <strong style="color:#ff0000" id="spanNewOrder">1</strong> 个新订单以及       <strong style="color:#ff0000" id="spanNewPaid">0</strong> 个新付款的订单</p>
+      <p align="center" style="word-break:break-all"><a href="order.php?act=list"><span style="color:#ff0000">点击查看新订单</span></a></p>
+    </div>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<!--
+<embed src="Public/Admin/images/online.wav" width="0" height="0" autostart="false" name="msgBeep" id="msgBeep" enablejavascript="true"/>
+-->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0" id="msgBeep" width="1" height="1">
+  <param name="movie" value="Public/Admin/images/online.swf">
+  <param name="quality" value="high">
+  <embed src="Public/Admin/images/online.swf" name="msgBeep" id="msgBeep" quality="high" width="0" height="0" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash">
+  </embed>
+</object>
+
+
+</body>
+</html>

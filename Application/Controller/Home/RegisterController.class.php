@@ -43,7 +43,10 @@ class RegisterController extends Controller {
         } else {
             $userModel->insert($user);
             setcookie('user_id', $result['user_id'], time() + 60 * 60 * 24, '/', '.test.212.com');
+            setcookie('username', $_POST['username'], time() + 60 * 60 * 24, '/', '.test.212.com');
             setcookie('password', md5($result['password']), time() + 60 * 60 * 24, '/', '.test.212.com');
+            new SessionDBTool;
+            $_SESSION['isLogin']='yes';
             $this->redirect('index.php?p=Home&c=User&a=index', '注册成功,即将跳转到个人中心', 2);
         }
     }

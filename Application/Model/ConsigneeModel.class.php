@@ -8,13 +8,14 @@
 class ConsigneeModel extends Model {
 
     //获取收货人信息
-    public function getConsigneeInfo() {
-        $rows = $this->getAll();
+    public function getConsigneeInfo($id) {
+        $rows = $this->getAll("user_id='$id'");
         return $rows;
     }
 
     //添加收货人
     public function insert($consignee) {
+        $consignee['user_id']=$_COOKIE['user_id'];
         $this->insertData($consignee);
     }
 

@@ -21,6 +21,8 @@ class UserModel extends Model {
         $hobby = $baseball | $football | $volleryball | $baseball;
         $user['hobby'] = $hobby;
         $password = $user['password'];
+        $user['register_time'] = date('Y-m-d H:i:s', time()); //注册时间
+        $user['birthday'] = $_POST['birthdayYear'] . '-' . $_POST['birthdayMonth'] . '-' . $_POST['birthdayDay']; //出生日期
         $user['password'] = md5($password);
         $this->insertData($user);
     }
@@ -64,6 +66,7 @@ class UserModel extends Model {
         unset($_SESSION['isLogin']);
         setcookie('user_id', '', time() - 60 * 60 * 24, '/', '.test.212.com');
         setcookie('password', '', time() - 60 * 60 * 24, '/', '.test.212.com');
+        setcookie('username', '', time() - 60 * 60 * 24, '/', '.test.212.com');
     }
 
     //展示用户信息
@@ -73,23 +76,25 @@ class UserModel extends Model {
 
     //修改用户信息
     public function updateUserInfo($user, $id) {
-        $this->updateData($user, "user_id=$id");
+        $user['birthday']=$user['year'].'-'.$user['month'].'-'.$user['day'];
+        $user['hobby']=  implode(',', $user['hobby_id']);
+        $this->updateData($user, "user_id='$id'");
     }
 
     //修改密码
     public function updatePassword($user) {
         //输入的原密码 
         $old_password = $user['old_password'];
-        $old_password=md5($old_password);
+        $old_password = md5($old_password);
         //输入新密码
         $new_password = $user['new_password'];
-        $new_password=  md5($new_password);
+        $new_password = md5($new_password);
         //确认密码
-        $confirm_password=$user['confirm_password'];
-        $confirm_password=md5($confirm_password);
+        $confirm_password = $user['confirm_password'];
+        $confirm_password = md5($confirm_password);
         //从数据库中取出真正的密码
-        $id=$_COOKIE['user_id'];
-        $password=  $this->getFieldByPK($id, "password");
+        $id = $_COOKIE['user_id'];
+        $password = $this->getFieldByPK($id, "password");
         //比对输入的原密码与数据库中的密码是否相同
         if ($old_password != $password) {
             $this->error_info = '原密码输入错误';
@@ -98,10 +103,21 @@ class UserModel extends Model {
             $this->error_info = '确认密码输入错误';
             return false;
         } else {
-            $user['password']=$new_password;
+            $user['password'] = $new_password;
             $this->updateData($user, "password=$new_password");
             return true;
         }
+    }
+
+    //在后台展示用户列表
+    public function getList() {
+        $users=  $this->getAll();
+        return $users;
+    }
+    //搜索用户
+    public function searchUser($username){
+        $useInfo=  $this->getRow("username=$username");
+        return $userInfo;
     }
 
 }

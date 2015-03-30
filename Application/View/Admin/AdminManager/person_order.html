@@ -1,0 +1,167 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <!----个人订单-->
+<head>
+<title>ECSHOP 管理中心 - 订单列表 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="Public/Admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="Public/Admin/styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="order.php?act=order_query">订单查询</a></span>
+<span class="action-span1"><a href="index.php?act=main">ECSHOP 管理中心</a> </span><span id="search_id" class="action-span1"> - 订单列表 </span>
+<div style="clear:both"></div>
+</h1>
+<div class="form-div">
+  <form action="javascript:searchOrder()" name="searchForm">
+    <img src="Public/Admin/images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    订单号<input name="order_sn" type="text" id="order_sn" size="15">
+    收货人<input name="consignee" type="text" id="consignee" size="15">
+    订单状态    <select name="status" id="status">
+      <option value="-1">请选择...</option>
+      <option value="0" selected>待确认</option><option value="100">待付款</option><option value="101">待发货</option><option value="102">已完成</option><option value="1">付款中</option><option value="2">取消</option><option value="3">无效</option><option value="4">退货</option><option value="6">部分发货</option>    </select>
+    <input type="submit" value=" 搜索 " class="button" />
+    <a href="order.php?act=list&composite_status=0">待确认</a>
+    <a href="order.php?act=list&composite_status=100">待付款</a>
+    <a href="order.php?act=list&composite_status=101">待发货</a>
+  </form>
+</div>
+
+<!-- 订单列表 -->
+<form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
+  <div class="list-div" id="listDiv">
+
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>
+      <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" /><a href="javascript:listTable.sort('order_sn', 'DESC'); ">订单号</a>    </th>
+    <th><a href="javascript:listTable.sort('add_time', 'DESC'); ">下单时间</a><img src="Public/Admin/images/sort_desc.gif"></th>
+    <th><a href="javascript:listTable.sort('consignee', 'DESC'); ">收货人</a></th>
+    <th><a href="javascript:listTable.sort('total_fee', 'DESC'); ">总金额</a></th>
+    <th><a href="javascript:listTable.sort('order_amount', 'DESC'); ">应付金额</a></th>
+    <th>订单状态</th>
+    <th>操作</th>
+  <tr>
+    <tr>
+    <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="2009051210718" /><a href="order.php?act=info&order_id=9" id="order_0">2009051210718</a></td>
+    <td>text<br />05-13 07:55</td>
+    <td align="left" valign="top"><a href="mailto:text@ecshop.com"> 叶先生</a> [TEL: 13588104710] <br />通州区旗舰凯旋小区</td>
+    <td align="right" valign="top" nowrap="nowrap">￥2015.00元</td>
+    <td align="right" valign="top" nowrap="nowrap">￥2015.00元</td>
+    <td align="center" valign="top" nowrap="nowrap">未确认,未付款,未发货</td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="order.php?act=info&order_id=9">查看</a>
+         </td>
+  </tr>
+    <tr>
+    <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="2009051299732" /><a href="order.php?act=info&order_id=8" id="order_1">2009051299732</a></td>
+    <td>text<br />05-13 07:50</td>
+    <td align="left" valign="top"><a href="mailto:text@ecshop.com"> 叶先生</a> [TEL: 13588104710] <br />通州区旗舰凯旋小区</td>
+    <td align="right" valign="top" nowrap="nowrap">￥638.00元</td>
+    <td align="right" valign="top" nowrap="nowrap">￥638.00元</td>
+    <td align="center" valign="top" nowrap="nowrap">未确认,未付款,未发货</td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="order.php?act=info&order_id=8">查看</a>
+         </td>
+  </tr>
+    <tr>
+    <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="2009051227085" /><a href="order.php?act=info&order_id=7" id="order_2">2009051227085</a></td>
+    <td>text<br />05-13 07:49</td>
+    <td align="left" valign="top"><a href="mailto:text@ecshop.com"> 叶先生</a> [TEL: 13588104710] <br />通州区旗舰凯旋小区</td>
+    <td align="right" valign="top" nowrap="nowrap">￥2313.00元</td>
+    <td align="right" valign="top" nowrap="nowrap">￥1198.10元</td>
+    <td align="center" valign="top" nowrap="nowrap">已确认,未付款,未发货</td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="order.php?act=info&order_id=7">查看</a>
+         </td>
+  </tr>
+    <tr>
+    <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes" value="2009051217221" /><a href="order.php?act=info&order_id=6" id="order_3">2009051217221</a></td>
+    <td>text<br />05-13 07:48</td>
+    <td align="left" valign="top"><a href="mailto:text@ecshop.com"> 叶先生</a> [TEL: 13588104710] <br />通州区旗舰凯旋小区</td>
+    <td align="right" valign="top" nowrap="nowrap">￥35.00元</td>
+    <td align="right" valign="top" nowrap="nowrap">￥35.00元</td>
+    <td align="center" valign="top" nowrap="nowrap"><font color="red">无效</font>,未付款,未发货</td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="order.php?act=info&order_id=6">查看</a>
+          <br /><a href="javascript:;" onclick="listTable.remove(6, remove_confirm, 'remove_order')">移除</a>
+         </td>
+  </tr>
+  </table>
+
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+          <!-- $Id: page.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+            <div id="turn-page">
+        总计  <span id="totalRecords">4</span>
+        个记录分为 <span id="totalPages">1</span>
+        页当前第 <span id="pageCurrent">1</span>
+        页，每页 <input type='text' size='3' id='pageSize' value="15" onkeypress="return listTable.changePageSize(event)" />
+        <span id="page-link">
+          <a href="javascript:listTable.gotoPageFirst()">第一页</a>
+          <a href="javascript:listTable.gotoPagePrev()">上一页</a>
+          <a href="javascript:listTable.gotoPageNext()">下一页</a>
+          <a href="javascript:listTable.gotoPageLast()">最末页</a>
+          <select id="gotoPage" onchange="listTable.gotoPage(this.value)">
+            <option value='1'>1</option>          </select>
+        </span>
+      </div>
+    </td>
+  </tr>
+</table>
+
+  </div>
+  <div>
+    <input name="confirm" type="submit" id="btnSubmit" value="确认" class="button" disabled="true" onclick="this.form.target = '_self'" />
+    <input name="invalid" type="submit" id="btnSubmit1" value="无效" class="button" disabled="true" onclick="this.form.target = '_self'" />
+    <input name="cancel" type="submit" id="btnSubmit2" value="取消" class="button" disabled="true" onclick="this.form.target = '_self'" />
+    <input name="remove" type="submit" id="btnSubmit3" value="移除" class="button" disabled="true" onclick="this.form.target = '_self'" />
+    <input name="print" type="submit" id="btnSubmit4" value="打印订单" class="button" disabled="true" onclick="this.form.target = '_blank'" />
+    <input name="batch" type="hidden" value="1" />
+    <input name="order_id" type="hidden" value="" />
+  </div>
+</form>
+
+
+
+<div id="footer">
+共执行 4 个查询，用时 0.028001 秒，Gzip 已禁用，内存占用 4.632 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+<!-- 新订单提示信息 -->
+<div id="popMsg">
+  <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#cfdef4" border="0">
+  <tr>
+    <td style="color: #0f2c8c" width="30" height="24"></td>
+    <td style="font-weight: normal; color: #1f336b; padding-top: 4px;padding-left: 4px" valign="center" width="100%"> 新订单通知</td>
+    <td style="padding-top: 2px;padding-right:2px" valign="center" align="right" width="19"><span title="关闭" style="cursor: hand;cursor:pointer;color:red;font-size:12px;font-weight:bold;margin-right:4px;" onclick="Message.close()" >×</span><!-- <img title=关闭 style="cursor: hand" onclick=closediv() hspace=3 src="msgclose.jpg"> --></td>
+  </tr>
+  <tr>
+    <td style="padding-right: 1px; padding-bottom: 1px" colspan="3" height="70">
+    <div id="popMsgContent">
+      <p>您有 <strong style="color:#ff0000" id="spanNewOrder">1</strong> 个新订单以及       <strong style="color:#ff0000" id="spanNewPaid">0</strong> 个新付款的订单</p>
+      <p align="center" style="word-break:break-all"><a href="order.php?act=list"><span style="color:#ff0000">点击查看新订单</span></a></p>
+    </div>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<!--
+<embed src="Public/Admin/images/online.wav" width="0" height="0" autostart="false" name="msgBeep" id="msgBeep" enablejavascript="true"/>
+-->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0" id="msgBeep" width="1" height="1">
+  <param name="movie" value="Public/Admin/images/online.swf">
+  <param name="quality" value="high">
+  <embed src="Public/Admin/images/online.swf" name="msgBeep" id="msgBeep" quality="high" width="0" height="0" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash">
+  </embed>
+</object>
+
+
+</body>
+</html>
