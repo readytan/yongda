@@ -6,13 +6,13 @@ return array(
     'DB'=>array(  //DB对应数据库的相关配置
         'host'=>'localhost',
         'user'=>'root',
-        'password'=>'hello',
+        'password'=>'',
         'port'=>'3306',
         'dbname'=>'yongda',
         'prefix'=>'yd_'   //配置前缀
     ),
     'app'=>array(  //将来为项目提供默认值
-        'default_platform'=>'Home',
+        'default_platform'=>'Admin',
         'default_controller'=>'User',
         'default_action'=>'login',
     ),
